@@ -4,11 +4,10 @@
   "private": true,
   "description": "FlowLedger — Enterprise Workflow & Approval Platform",
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
-    "install:all": "npm --prefix backend install && npm --prefix frontend install",
-    "build": "npm --prefix frontend run build",
+    "build": "bash build.sh",
     "start": "node backend/src/server.js",
     "seed": "node backend/src/seeder.js",
     "dev:backend": "npm --prefix backend run dev",
