@@ -81,7 +81,7 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1, duration: 0.5 }}
           >
-            <Card className="h-full">
+            <Card interactive={false} className="h-full">
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-gray-500 text-sm font-semibold uppercase tracking-wider mb-2">{stat.title}</p>
@@ -110,7 +110,7 @@ const Dashboard = () => {
           transition={{ delay: 0.4, duration: 0.5 }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="min-h-[300px] flex flex-col">
+            <Card interactive={false} className="min-h-[300px] flex flex-col">
               <h3 className="font-editorial font-semibold text-lg mb-4">Requests by Status</h3>
               <div className="flex-1">
                 {loading ? (
@@ -133,7 +133,7 @@ const Dashboard = () => {
               </div>
             </Card>
             
-            <Card className="min-h-[300px] flex flex-col">
+            <Card interactive={false} className="min-h-[300px] flex flex-col">
               <h3 className="font-editorial font-semibold text-lg mb-4">Requests by Type</h3>
               <div className="flex-1">
                 {loading ? (
@@ -155,7 +155,7 @@ const Dashboard = () => {
             </Card>
           </div>
 
-          <Card className="min-h-[400px]">
+          <Card interactive={false} className="min-h-[400px]">
             <div className="flex items-center justify-between mb-6">
               <h3 className="font-editorial font-semibold text-xl">Recent Requests</h3>
               <Link to="/requests" className="text-sm font-medium text-accent-blue hover:text-neon-pink transition-colors">View All</Link>
@@ -207,7 +207,7 @@ const Dashboard = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Card>
+          <Card interactive={false}>
             <h3 className="font-editorial font-semibold text-xl mb-6">Quick Actions</h3>
             <div className="space-y-3">
               <Link to="/requests/new" className="w-full text-left px-4 py-3 rounded-xl border border-gray-100 hover:border-neon-pink/30 hover:bg-neon-pink/5 transition-all group flex items-center gap-3">
@@ -225,7 +225,7 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          <Card className="min-h-[400px]">
+          <Card interactive={false} className="min-h-[400px]">
              <div className="flex items-center justify-between mb-6">
               <h3 className="font-editorial font-semibold text-xl">Recent Activity</h3>
               <Activity size={18} className="text-gray-400" />

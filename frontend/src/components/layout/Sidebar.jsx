@@ -14,6 +14,7 @@ import {
   Bell
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import LiquidGlassCluster from '../originkit/ui/glass-icon';
 
 const Sidebar = () => {
   const { user } = useContext(AuthContext);
@@ -43,10 +44,10 @@ const Sidebar = () => {
     <aside className="w-64 h-screen bg-white/80 backdrop-blur-xl border-r border-gray-200 flex flex-col fixed left-0 top-0 z-40">
       <div className="h-20 flex items-center px-8 border-b border-gray-100">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-pink to-accent-blue flex items-center justify-center shadow-lg shadow-neon-pink/20">
-            <span className="text-white font-bold text-xl">F</span>
+          <div className="w-8 h-8 rounded-lg relative overflow-hidden flex items-center justify-center shadow-lg shadow-neon-pink/10 mix-blend-multiply">
+            <LiquidGlassCluster background="transparent" />
           </div>
-          <h1 className="text-xl font-editorial font-bold tracking-tight">FlowLedger</h1>
+          <h1 className="text-xl font-editorial font-bold tracking-tight text-charcoal">FlowLedger</h1>
         </div>
       </div>
 
@@ -57,7 +58,7 @@ const Sidebar = () => {
             to={item.path}
             className={({ isActive }) =>
               cn(
-                'relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-sm overflow-hidden',
+                'group relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-sm overflow-hidden hover:translate-x-1',
                 isActive 
                   ? 'text-charcoal bg-gray-50' 
                   : 'text-gray-500 hover:text-charcoal hover:bg-gray-50/50'

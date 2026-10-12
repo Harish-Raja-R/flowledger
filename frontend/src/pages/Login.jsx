@@ -5,7 +5,9 @@ import { AuthContext } from '../context/AuthContext';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import CustomCursor from '../components/ui/CustomCursor';
-import { Lock, ArrowRight, Zap, CheckCircle } from 'lucide-react';
+import { Lock, ArrowRight, Zap, CheckCircle, ArrowRight as ArrowRightIcon } from 'lucide-react';
+import WireTerrain from '../components/originkit/ui/wire-terrain';
+import LiquidGlassCluster from '../components/originkit/ui/glass-icon';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -37,23 +39,21 @@ const Login = () => {
       <div className="hidden lg:flex flex-1 relative overflow-hidden bg-charcoal text-white flex-col justify-center p-16">
         <div className="absolute inset-0 z-0 opacity-20">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-neon-pink/40 via-charcoal to-charcoal" />
-          <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-emerald/40 via-charcoal to-charcoal" />
+        </div>
+        <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none">
+          <WireTerrain background="transparent" lineColor="#4146DF" accent="#F05AC8" speed={30} />
         </div>
         
-        <div className="relative z-10 max-w-lg">
+        <div className="relative z-10 max-w-lg mt-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-pink to-accent-blue flex items-center justify-center shadow-lg shadow-neon-pink/20 mb-8">
-              <span className="text-white font-bold text-3xl">F</span>
-            </div>
-            
-            <h1 className="text-5xl lg:text-6xl font-editorial font-bold leading-tight mb-6">
-              The Future of <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-accent-blue">
-                Workflows
+            <h1 className="text-5xl lg:text-6xl font-editorial font-bold leading-tight mb-6 uppercase">
+              EVERY DECISION.<br/>
+              <span className="text-brand-pink">
+                ONE CLEAR FLOW.
               </span>
             </h1>
             <p className="text-gray-400 text-lg mb-12">
@@ -67,27 +67,37 @@ const Login = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="space-y-6"
           >
-            {/* Animated UI representation */}
+            {/* Illustrative timeline */}
             <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald/20 flex items-center justify-center">
-                    <CheckCircle className="text-emerald" size={20} />
+              <div className="flex flex-col gap-6 relative">
+                <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-white/10"></div>
+                
+                <div className="flex items-center gap-4 relative z-10">
+                  <div className="w-8 h-8 rounded-full bg-emerald flex items-center justify-center border-4 border-charcoal">
+                    <CheckCircle className="text-white" size={14} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white">Purchase Order #1042</h3>
-                    <p className="text-sm text-gray-400">Approved by Finance</p>
+                    <h3 className="font-semibold text-white text-sm">Manager</h3>
                   </div>
                 </div>
-                <div className="text-sm font-medium text-emerald">Just now</div>
-              </div>
-              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                <motion.div 
-                  className="h-full bg-gradient-to-r from-emerald to-accent-blue"
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 1.5, delay: 1 }}
-                />
+
+                <div className="flex items-center gap-4 relative z-10">
+                  <div className="w-8 h-8 rounded-full bg-emerald flex items-center justify-center border-4 border-charcoal">
+                    <CheckCircle className="text-white" size={14} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-sm">Finance</h3>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 relative z-10">
+                  <div className="w-8 h-8 rounded-full bg-charcoal border-4 border-charcoal flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-brand-pink animate-pulse"></div>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-sm">Department Head</h3>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -105,11 +115,12 @@ const Login = () => {
           transition={{ duration: 0.6 }}
           className="max-w-md w-full mx-auto relative z-10"
         >
-          <div className="lg:hidden w-12 h-12 rounded-xl bg-gradient-to-br from-neon-pink to-accent-blue flex items-center justify-center shadow-lg shadow-neon-pink/20 mb-8">
-            <span className="text-white font-bold text-3xl">F</span>
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-12 h-12 relative">
+              <LiquidGlassCluster background="transparent" />
+            </div>
+            <h2 className="text-4xl font-editorial font-bold tracking-tight">Welcome back</h2>
           </div>
-          
-          <h2 className="text-4xl font-editorial font-bold mb-2 tracking-tight">Welcome back</h2>
           <p className="text-gray-500 mb-8">Enter your credentials to access your workspace.</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">

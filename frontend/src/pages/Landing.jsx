@@ -7,6 +7,12 @@ import {
 } from 'lucide-react';
 import { cn } from '../utils/cn';
 
+import CursorRingField from '../components/originkit/ui/cursor-ring-field';
+import WireTerrain from '../components/originkit/ui/wire-terrain';
+import VectorWordmark from '../components/originkit/ui/vector-wordmark';
+import XylophoneHelix from '../components/originkit/ui/xylophone-helix';
+import LiquidGlassCluster from '../components/originkit/ui/glass-icon';
+
 // COLORS
 
 // --- COMPONENTS ---
@@ -105,6 +111,14 @@ const HeroSection = () => {
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-brand-offwhite overflow-hidden min-h-screen flex flex-col items-center">
       {/* Background Grid */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#101010 1px, transparent 1px), linear-gradient(90deg, #101010 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      
+      {/* Pointer-responsive cursor field */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-multiply">
+        <CursorRingField 
+           background="transparent"
+           colors={["#20B889", "#F05AC8", "#4146DF"]}
+        />
+      </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center">
         <motion.div
@@ -511,8 +525,11 @@ const ProductShowcase = () => {
 
 const WorkflowSteps = () => {
   return (
-    <section id="how-it-works" className="py-32 bg-brand-periwinkle text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="how-it-works" className="py-32 bg-brand-periwinkle text-white overflow-hidden relative">
+      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none mix-blend-screen">
+        <XylophoneHelix background="transparent" />
+      </div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-20">
           <span className="uppercase text-xs font-bold tracking-[0.2em] text-white/70 mb-6 block">04 / HOW IT WORKS</span>
           <h2 className="font-editorial text-5xl md:text-7xl font-black uppercase tracking-tighter">
@@ -572,9 +589,16 @@ const FeatureEditorial = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
           {features.map((feature, i) => (
             <div key={i} className="relative group">
-              <div className="text-sm font-mono text-gray-500 mb-4 border-b border-brand-charcoal/10 pb-4">[{String(i + 1).padStart(2, '0')}]</div>
-              <h3 className="text-2xl font-editorial font-bold mb-3 group-hover:text-brand-pink transition-colors">{feature.title}</h3>
-              <p className="text-gray-500 leading-relaxed">{feature.desc}</p>
+              <div className="flex justify-between items-start mb-4 border-b border-brand-charcoal/10 pb-4">
+                <div className="text-sm font-mono text-gray-500">[{String(i + 1).padStart(2, '0')}]</div>
+                <div className="w-12 h-12 relative z-10">
+                  <LiquidGlassCluster 
+                    background="transparent" 
+                  />
+                </div>
+              </div>
+              <h3 className="text-2xl font-editorial font-bold mb-3 group-hover:text-brand-pink transition-colors relative z-10">{feature.title}</h3>
+              <p className="text-gray-500 leading-relaxed relative z-10">{feature.desc}</p>
             </div>
           ))}
         </div>
@@ -772,6 +796,11 @@ const FinalCTA = () => {
       {/* Decorative gradient */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-pink via-brand-periwinkle to-brand-emerald"></div>
       
+      {/* Wire Terrain Background */}
+      <div className="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none">
+        <WireTerrain background="transparent" lineColor="#4146DF" accent="#F05AC8" speed={30} />
+      </div>
+
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <h2 className="font-editorial text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-[0.9]">
           Make Every<br/>Next Step Clear.

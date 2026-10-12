@@ -10,7 +10,7 @@ import { ArrowLeft, Save, Plus, Trash2 } from 'lucide-react';
 
 const WorkflowEdit = () => {
   const { id } = useParams();
-  const isNew = id === 'new';
+  const isNew = !id || id === 'new';
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
@@ -63,27 +63,21 @@ const WorkflowEdit = () => {
   }, [id, isNew, navigate]);
 
   const handleAddStep = () => {
-    setSteps([...steps, { 
-      name: `Step ${steps.length + 1}`, 
+    setSteps(prev => [...prev, { 
+      name: `Step ${prev.length + 1}`, 
       approverRole: 'MANAGER', 
       isRequired: true, 
       slaHours: 24, 
-      order: steps.length + 1 
+      order: prev.length + 1 
     }]);
   };
 
   const handleRemoveStep = (index) => {
-    const newSteps = [...steps];
-    newSteps.splice(index, 1);
-    // Reorder
-    newSteps.forEach((step, i) => step.order = i + 1);
-    setSteps(newSteps);
+    setSteps(prev => prev.filter((_, i) => i !== index).map((step, i) => ({ ...step, order: i + 1 })));
   };
 
   const handleStepChange = (index, field, value) => {
-    const newSteps = [...steps];
-    newSteps[index][field] = value;
-    setSteps(newSteps);
+    setSteps(prev => prev.map((step, i) => i === index ? { ...step, [field]: value } : step));
   };
 
   const handleSubmit = async (e) => {
@@ -94,7 +88,7 @@ const WorkflowEdit = () => {
         name,
         description,
         type,
-        department: department || undefined, // undefined for 'All'
+        department: department || null, // null for 'All Departments'
         isActive,
         steps
       };

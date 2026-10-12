@@ -3,7 +3,11 @@ import { createAuditLog } from '../services/auditService.js';
 
 export const createWorkflow = async (req, res, next) => {
   try {
-    const workflow = await Workflow.create(req.body);
+    const payload = { ...req.body };
+    if (!payload.department) {
+      delete payload.department;
+    }
+    const workflow = await Workflow.create(payload);
     await createAuditLog({
       actor: req.user._id,
       action: 'WORKFLOW_CREATED',
@@ -13,6 +17,10 @@ export const createWorkflow = async (req, res, next) => {
     });
     res.status(201).json({ success: true, data: workflow });
   } catch (error) {
+    if (error.code === 11000) {
+      res.status(400);
+      return next(new Error('A workflow with this name already exists'));
+    }
     next(error);
   }
 };
@@ -41,7 +49,11 @@ export const getWorkflowById = async (req, res, next) => {
 
 export const updateWorkflow = async (req, res, next) => {
   try {
-    const workflow = await Workflow.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    const payload = { ...req.body };
+    if (!payload.department) {
+      payload.department = null;
+    }
+    const workflow = await Workflow.findByIdAndUpdate(req.params.id, payload, { new: true, runValidators: true });
     if (!workflow) {
       res.status(404);
       throw new Error('Workflow not found');
@@ -55,6 +67,10 @@ export const updateWorkflow = async (req, res, next) => {
     });
     res.json({ success: true, data: workflow });
   } catch (error) {
+    if (error.code === 11000) {
+      res.status(400);
+      return next(new Error('A workflow with this name already exists'));
+    }
     next(error);
   }
 };

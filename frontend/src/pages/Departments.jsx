@@ -42,7 +42,8 @@ const Departments = () => {
     <div className="max-w-7xl mx-auto space-y-8">
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-editorial font-bold text-charcoal tracking-tight mb-2">Departments</h1>
+          <span className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-2 block">Workspace</span>
+          <h1 className="text-4xl md:text-5xl font-editorial font-bold text-charcoal tracking-tight mb-2 uppercase">Departments</h1>
           <p className="text-gray-500">Manage organizational structure and groups.</p>
         </div>
         <Button onClick={() => navigate('/departments/new')} className="shrink-0">

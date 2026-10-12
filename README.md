@@ -38,3 +38,33 @@ After running the seed script, you can log in with:
 - **Finance**: finance@flowledger.com / password
 - **Department Head**: head@flowledger.com / password
 - **Admin**: admin@flowledger.com / password
+
+---
+
+## Production Deployment
+
+### Option 1: Docker (Single-Command Local or VPS)
+Run the complete stack (App + MongoDB) with Docker Compose:
+```bash
+docker compose up --build -d
+```
+The application will be live at `http://localhost:5000`.
+
+### Option 2: Render (Free Cloud Web Service)
+1. Push repository to GitHub.
+2. Go to [Render Dashboard](https://dashboard.render.com/) -> **New** -> **Blueprint**.
+3. Connect repository `Harish-Raja-R/flowledger`. Render will automatically pick up `render.yaml`.
+4. Set your `MONGO_URI` environment variable (e.g., from [MongoDB Atlas](https://www.mongodb.com/atlas)).
+5. Click **Apply**. Render will automatically build the React frontend and deploy the Express server.
+
+### Option 3: Split Deployment (Vercel + Render)
+- **Frontend (Vercel)**:
+  - Root directory: `frontend`
+  - Build command: `npm run build`
+  - Output directory: `dist`
+  - Environment variable: `VITE_API_URL=https://your-backend-api.onrender.com/api`
+- **Backend (Render / Railway)**:
+  - Root directory: `backend`
+  - Build command: `npm install`
+  - Start command: `node src/server.js`
+  - Environment variables: `PORT=5000`, `NODE_ENV=production`, `MONGO_URI=<Atlas-URI>`, `JWT_SECRET=<secret>`

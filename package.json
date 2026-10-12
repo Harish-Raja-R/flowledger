@@ -1,0 +1,25 @@
+{
+  "name": "flowledger",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FlowLedger — Enterprise Workflow & Approval Platform",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "start": "node backend/src/server.js",
+    "seed": "npm run seed --prefix backend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend"
+  },
+  "keywords": [
+    "workflow",
+    "approval",
+    "ledger",
+    "react",
+    "vite",
+    "express",
+    "mongodb"
+  ],
+  "author": "FlowLedger Team",
+  "license": "ISC"
+}

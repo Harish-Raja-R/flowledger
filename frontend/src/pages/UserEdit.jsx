@@ -10,7 +10,7 @@ import { ArrowLeft, Save } from 'lucide-react';
 
 const UserEdit = () => {
   const { id } = useParams();
-  const isNew = id === 'new';
+  const isNew = !id || id === 'new';
   const navigate = useNavigate();
 
   const [name, setName] = useState('');

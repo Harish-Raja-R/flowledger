@@ -12,7 +12,7 @@ export const createRequest = async (req, res, next) => {
       description,
       type,
       requester: req.user._id,
-      department,
+      department: department || req.user.department,
       amount,
       priority,
       data,
@@ -111,8 +111,23 @@ export const submitRequest = async (req, res, next) => {
       throw new Error('Only draft requests can be submitted');
     }
 
-    const workflow = await Workflow.findOne({ type: request.type, isActive: true, department: request.department });
-    if (!workflow || workflow.steps.length === 0) {
+    let workflow = request.department
+      ? await Workflow.findOne({ type: request.type, isActive: true, department: request.department })
+      : null;
+
+    if (!workflow) {
+      workflow = await Workflow.findOne({
+        type: request.type,
+        isActive: true,
+        $or: [{ department: null }, { department: { $exists: false } }]
+      });
+    }
+
+    if (!workflow) {
+      workflow = await Workflow.findOne({ type: request.type, isActive: true });
+    }
+
+    if (!workflow || !workflow.steps || workflow.steps.length === 0) {
       res.status(400);
       throw new Error('No active workflow found for this request type and department');
     }
